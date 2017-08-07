@@ -1,0 +1,19 @@
+
+ext.projectIds = [groupId:'com.springcloud.learn',version:'1.0.0-SNAPSHOT',sourceCompatibility:1.8]
+allprojects{
+    group projectIds.groupId
+    version  projectIds.version
+}
+
+subprojects{
+    //apply plugin: 'groovy'
+    apply plugin: 'java'
+    sourceCompatibility = projectIds.sourceCompatibility
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        testCompile group: 'junit', name: 'junit', version: '4.11'
+    }
+}
+
