@@ -1,4 +1,4 @@
-package service;
+package com.server.service;
 
 /**
  * Created by xiaofengfu on 2017/8/7.

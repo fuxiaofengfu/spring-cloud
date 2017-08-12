@@ -2,3 +2,5 @@ rootProject.name = 'springcloud.parent'
 include 'springcloud-client','springcloud-server'
 rootProject.children.each {
 }
+include 'springcloud-server-instance'
+
