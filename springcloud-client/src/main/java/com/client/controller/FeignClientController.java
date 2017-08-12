@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
  * Created by xiaofengfu on 2017/8/8.
  */
 @FeignClient("eureka-server-instance1")
-public interface MyClientController {
+public interface FeignClientController {
 
-    @GetMapping("/eureka2")
+    @GetMapping("/eureka-instance")
     public String testeur();
 }
