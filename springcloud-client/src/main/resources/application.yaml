@@ -5,6 +5,7 @@ spring:
     hibernate:
       ddl-auto: update
   datasource:
+    name: myDataSource
     url: jdbc:mysql://127.0.0.1:3306/moqui?autoReconnect=true&characterEncoding=UTF-8
     username: root
     password: 123456
@@ -22,6 +23,10 @@ eureka:
   instance:
     prefer-ip-address: true
 logging:
-  level: info
+  level:
+    com.client.mybatis: debug
 turbine:
   instanceInsertPort: false
+mybatis:
+  config-location: classpath:mybatisConfig.xml
+  mapper-locations: classpath*:mybatismapper/**/*.xml
