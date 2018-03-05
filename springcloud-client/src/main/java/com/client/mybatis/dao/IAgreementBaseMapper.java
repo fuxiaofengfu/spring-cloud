@@ -1,4 +1,4 @@
-package com.client.mybatis;
+package com.client.mybatis.dao;
 
 import com.client.mybatis.domain.AgreementBase;
 import org.apache.ibatis.annotations.*;
