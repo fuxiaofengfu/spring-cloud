@@ -1,17 +1,24 @@
 package com.client.start;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.Banner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.web.HttpMessageConverters;
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.netflix.feign.EnableFeignClients;
 import org.springframework.cloud.netflix.hystrix.dashboard.EnableHystrixDashboard;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ComponentScans;
+import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by xiaofengfu on 2017/8/8.
@@ -23,8 +30,8 @@ import org.springframework.http.converter.HttpMessageConverter;
 @EnableFeignClients(basePackages = {"com.client.feignclient"})
 @MapperScan("com.client.mybatis")
 @SpringBootApplication//(scanBasePackages = {"com.client.controller"})
-@ComponentScans(@ComponentScan({"com.client.config","com.client.controller","com.client.service"}))
-public class ClientApp {
+@ComponentScans(@ComponentScan({"com.client.config", "com.client.controller", "com.client.service"}))
+public class ClientApp extends WebMvcConfigurerAdapter {
 
 	public static void main(String[] args) {
 		SpringApplication springApplication = new SpringApplication(ClientApp.class);
@@ -32,7 +39,7 @@ public class ClientApp {
 		springApplication.run(args);
 	}
 
-//	@Bean
+	//	@Bean
 //	public HttpMessageConverters fastJsonHttpMessageConverters(){
 //		FastJsonHttpMessageConverter fastConverter = new FastJsonHttpMessageConverter();//2
 //
@@ -47,5 +54,30 @@ public class ClientApp {
 //
 //		return new HttpMessageConverters(converter);
 //	}
+	@Bean
+	public MappingJackson2HttpMessageConverter getMappingJackson2HttpMessageConverter() {
+		MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter = new MappingJackson2HttpMessageConverter();
+		//设置日期格式
+		ObjectMapper objectMapper = new ObjectMapper();
+		SimpleDateFormat smt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		objectMapper.setDateFormat(smt);
+		mappingJackson2HttpMessageConverter.setObjectMapper(objectMapper);
+		//设置中文编码格式
+		List<MediaType> list = new ArrayList<>();
+		list.add(MediaType.APPLICATION_JSON_UTF8);
+		list.add(MediaType.TEXT_HTML);
+		mappingJackson2HttpMessageConverter.setSupportedMediaTypes(list);
+		return mappingJackson2HttpMessageConverter;
+	}
 
+	/**
+	 * {@inheritDoc}
+	 * <p>This implementation is empty.
+	 *
+	 * @param converters
+	 */
+	@Override
+	public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
+		super.extendMessageConverters(converters);
+	}
 }

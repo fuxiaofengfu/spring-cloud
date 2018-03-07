@@ -12,6 +12,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
   application:
     name: eureka-client
+
 server:
   port: 8086
 eureka:
@@ -25,6 +26,7 @@ eureka:
 logging:
   level:
     com.client.mybatis: debug
+    root: info
 turbine:
   instanceInsertPort: false
 mybatis:

@@ -1,6 +1,5 @@
 package com.client.controller;
 
-import com.alibaba.fastjson.JSON;
 import com.client.feignclient.FeignClientController;
 import com.client.mybatis.domain.AgreementBase;
 import com.client.service.AgreementBaseService;
@@ -36,7 +35,7 @@ public class ServerController {
 		return "serverDead....";
 	}
 
-	@GetMapping("get_agreement_all")
+	@GetMapping(value = "get_agreement_all",produces="application/json;charset=UTF-8")
 	public List<AgreementBase> getAll() {
 
 		List<AgreementBase> all = agreementBaseService.getAll();
@@ -44,9 +43,10 @@ public class ServerController {
 	}
 
 	@GetMapping("getPageAll")
-	public String getPageAll(int pageNo,int pageSize) {
+	public PageInfo<AgreementBase> getPageAll(int pageNo,int pageSize) {
 
 		PageInfo<AgreementBase> page = agreementBaseService.getPageAll(pageSize,pageNo);
-		return JSON.toJSONString(page,true);
+		//return JSON.toJSONString(page,true);
+		return page;
 	}
 }
