@@ -6,6 +6,7 @@ import org.springframework.boot.Banner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.netflix.feign.EnableFeignClients;
 import org.springframework.cloud.netflix.hystrix.dashboard.EnableHystrixDashboard;
 import org.springframework.context.annotation.Bean;
@@ -24,7 +25,7 @@ import java.util.List;
  * Created by xiaofengfu on 2017/8/8.
  */
 //@EnableTurbine
-//@EnableEurekaClient  //如果要使用eureka服务发现，请将此注释打开
+@EnableEurekaClient  //如果要使用eureka服务发现，请将此注释打开
 @EnableCircuitBreaker
 @EnableHystrixDashboard
 @EnableFeignClients(basePackages = {"com.client.feignclient"})

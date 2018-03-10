@@ -3,4 +3,5 @@ include 'springcloud-client','springcloud-server'
 rootProject.children.each {
 }
 include 'springcloud-server-instance'
+include 'springcloud-zuul'
 

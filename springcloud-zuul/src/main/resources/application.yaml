@@ -1,0 +1,40 @@
+server:
+  port: 8087
+spring:
+  application:
+      name: spring-cloud-zuul
+  autoconfigure:
+    exclude:
+      org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration,
+      org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration,
+      org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration
+#  jpa:
+#    generate-ddl: false
+#    show-sql: true
+#    hibernate:
+#      ddl-auto: update
+#  datasource:
+#      url: jdbc:mysql://127.0.0.1:3306/moqui?autoReconnect=true&characterEncoding=UTF-8
+#      username: root
+#      password: 123456
+#      driver-class-name: com.mysql.cj.jdbc.Driver
+
+security:
+  user:
+    name: my
+    password: 1234
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://my:1234@localhost:8080/eureka
+    fetch-registry: true  # 从注册中心获取注册信息
+    register-with-eureka: true    # 注册到注册中心
+zuul:
+  routes:
+    client:
+      path: "/client/**"
+      service-id: "eureka-client"
+    eureka-server-instance1: "/server1/**"
+
+    ignored-services: "*"
