@@ -28,7 +28,7 @@ import java.util.List;
  * Created by xiaofengfu on 2017/8/8.
  */
 //@EnableTurbine
-//@EnableEurekaClient  //如果要使用eureka服务发现，请将此注释打开
+@EnableEurekaClient  //如果要使用eureka服务发现，请将此注释打开
 @EnableCircuitBreaker
 @EnableHystrixDashboard
 @EnableFeignClients(basePackages = {"com.client.feignclient"})
