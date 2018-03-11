@@ -10,6 +10,12 @@ spring:
     username: root
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
+#    type: org.apache.tomcat.jdbc.pool.DataSource
+  second-datasource:
+    url: jdbc:mysql://127.0.0.1:3306/cqliving_online?autoReconnect=true&characterEncoding=UTF-8
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
   application:
     name: eureka-client
 

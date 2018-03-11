@@ -2,6 +2,7 @@ package com.client.controller;
 
 import com.client.feignclient.FeignClientController;
 import com.client.mybatis.domain.AgreementBase;
+import com.client.mybatis.domain.AppInfo;
 import com.client.service.AgreementBaseService;
 import com.github.pagehelper.PageInfo;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.ws.rs.GET;
 import java.util.List;
 
 /**
@@ -48,5 +50,17 @@ public class ServerController {
 		PageInfo<AgreementBase> page = agreementBaseService.getPageAll(pageSize,pageNo);
 		//return JSON.toJSONString(page,true);
 		return page;
+	}
+
+	@GetMapping("get_app_info")
+	public List<AppInfo> getAppInfo(){
+
+		return agreementBaseService.getAppInfo();
+	}
+
+	@GetMapping("get_agreement")
+	public List<AgreementBase> get(){
+
+		return agreementBaseService.findAll();
 	}
 }

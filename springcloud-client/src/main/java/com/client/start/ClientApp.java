@@ -1,22 +1,25 @@
 package com.client.start;
 
+import com.client.config.MyMultiDataSourceConfig;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.Banner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.netflix.feign.EnableFeignClients;
 import org.springframework.cloud.netflix.hystrix.dashboard.EnableHystrixDashboard;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.ComponentScans;
+import org.springframework.context.annotation.*;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
+import javax.sql.DataSource;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,13 +28,13 @@ import java.util.List;
  * Created by xiaofengfu on 2017/8/8.
  */
 //@EnableTurbine
-@EnableEurekaClient  //如果要使用eureka服务发现，请将此注释打开
+//@EnableEurekaClient  //如果要使用eureka服务发现，请将此注释打开
 @EnableCircuitBreaker
 @EnableHystrixDashboard
 @EnableFeignClients(basePackages = {"com.client.feignclient"})
-@MapperScan("com.client.mybatis")
-@SpringBootApplication//(scanBasePackages = {"com.client.controller"})
+@SpringBootApplication//(exclude = { DataSourceAutoConfiguration.class })//(scanBasePackages = {"com.client.controller"})
 @ComponentScans(@ComponentScan({"com.client.config", "com.client.controller", "com.client.service"}))
+//@Import(MyMultiDataSourceConfig.class)
 public class ClientApp extends WebMvcConfigurerAdapter {
 
 	public static void main(String[] args) {
