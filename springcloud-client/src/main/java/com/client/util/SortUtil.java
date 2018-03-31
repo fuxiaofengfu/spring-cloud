@@ -9,7 +9,6 @@ public class SortUtil {
 
 
 	public static void main(String[] args) {
-		System.out.println("========");
 		int[][] ss = {{1,2,3,4},{32,9,3,13,5,7},{65,12,5,6,10,8,6,99}};
 		sort2DArray(ss);
 		for (int i = ss.length-1 ; i >= 0; i--) {
